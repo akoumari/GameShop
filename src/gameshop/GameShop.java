@@ -88,6 +88,41 @@ public class GameShop {
             }
             System.out.println("");
         }
+        public static void menu(Scanner sc, BSTree bst, Player pl){
+            int option = 0;
+            
+            do{
+                System.out.println("Greetings traveller! Welcome to the Weapon Shop\n\n" +
+                "Please select an option from the list below.\n" +
+                "1.Add Weapons to the shop\n" +
+                "2.Buy Weapons\n" +
+                "3.View Backpack\n" +
+                "4.View Charecter\n" +        
+                "5.Exit");
+                option = sc.nextInt();
+                switch(option){
+                    case 1: 
+                        addWeapons(bst,sc);
+                        break;
+                    case 2: 
+                        showRoom(bst, pl,sc);
+                        break;
+                    case 3: 
+                        pl.printBackpack();
+                        break;
+                    case 4: 
+                        pl.printCharacter();
+                        break;
+                    case 5: 
+                        System.out.println("\nThank you for being a memeber of the CASUAL WRITERS BOOK CLUB");
+                        break;    
+                }
+
+            }while(option != 5);
+            System.out.println("Well met traveller! Be safe. Endor can be a dangerous place...");
+
+
+        }
         
         public static void main(String[] args)
         {
@@ -97,9 +132,10 @@ public class GameShop {
             pname=sc.next();
             Player pl= new Player(pname,45);
             BSTree bst= new BSTree();
-            addWeapons(bst,sc);
-            showRoom(bst, pl,sc);
-            pl.printCharacter();
+            menu(sc, bst, pl);
+            sc.close();
+            
+            
 
         }
 

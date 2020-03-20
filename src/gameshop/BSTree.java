@@ -40,7 +40,11 @@ public class BSTree {
             parent=current;
             if (current.data.item.weaponName.compareToIgnoreCase(key.item.weaponName) > 0){
                 current=current.left;
-            }else{
+            }else if(current.data.item.weaponName.compareToIgnoreCase(key.item.weaponName) == 0){
+                System.out.println("Weapon name already exists brother please consider naming it something else!");
+                return;
+            }
+            else{
                 current=current.right;
             }
         }
@@ -57,9 +61,11 @@ public class BSTree {
     }
     
     public void recInOrder(BSTNode curr){
-        if (curr!=null && curr.data.numberInStock > 0){
+        if (curr!=null){
             recInOrder(curr.left);
-            System.out.println("Name: " +curr.data.item.weaponName+"   Damage:"+curr.data.item.damage+"    Cost:"+curr.data.item.cost+"     Quantity in stock:"+curr.data.numberInStock);
+            if(curr.data.numberInStock > 0){
+                System.out.println("Name: " +curr.data.item.weaponName+"   Damage:"+curr.data.item.damage+"    Cost:"+curr.data.item.cost+"     Quantity in stock:"+curr.data.numberInStock);
+            }
             recInOrder(curr.right); 
         }
     }

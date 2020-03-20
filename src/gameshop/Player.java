@@ -33,8 +33,17 @@ class Player
 
         public void printBackpack()
         {
-             System.out.println(" "+name+", you own "+numItems+" Weapons:");
-            for (int x = 0; x < numItems; x++)
+            System.out.println(" "+name+", your backpack weighs "+backpack.presentWeight+" pounds\n your max capacity is: "+backpack.maxWeight);
+            System.out.print(" Backpack Weight: ");
+            for(int i =0; i < backpack.maxWeight/10; i++){
+                if(i <= backpack.presentWeight/10){
+                    System.out.print("#");
+                }
+                else{
+                    System.out.print("=");
+                }
+            }
+            System.out.println("");
             backpack.printWeapons();
             System.out.println();
         }
