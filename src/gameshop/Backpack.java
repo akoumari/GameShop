@@ -44,7 +44,7 @@ package gameshop;
             public void printWeapons(){
                 BPNode curr = head;
                 while(curr != null){
-                    System.out.print(" "+curr.data.weaponName+" Quantity: "+curr.quantity);
+                    System.out.print(" Weapon name: "+curr.data.weaponName+" Quantity: "+curr.quantity);
                     curr = curr.next;
                 }
                 System.out.println("");
