@@ -58,7 +58,7 @@ public class GameShop {
             String choice;
             showRoomMenu(bst,p);
             choice=sc.next();
-            while (choice.compareTo("end") != 0 && !p.inventoryFull())
+            while (choice.compareTo("end") != 0)
             {
                 BSTNode si = bst.search(choice);
                 if (si != null)
@@ -69,9 +69,14 @@ public class GameShop {
                     }
                     else
                     {
-                        p.buy(si.data.item);
+                        if(p.buy(si.data.item)){
                         p.withdraw(si.data.item.cost);
                         si.data.numberInStock--;
+                        }
+                        else{
+                            System.out.println("");
+                            return;
+                        }
                     }
                 }
                 else

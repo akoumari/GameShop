@@ -52,13 +52,12 @@ public class BSTree {
     }
     
     public void inOrderTrav(){
-        System.out.print("In Order Traversal:");
         recInOrder(root);
         System.out.println("");
     }
     
     public void recInOrder(BSTNode curr){
-        if (curr!=null){
+        if (curr!=null && curr.data.numberInStock > 0){
             recInOrder(curr.left);
             System.out.println("Name: " +curr.data.item.weaponName+"   Damage:"+curr.data.item.damage+"    Cost:"+curr.data.item.cost+"     Quantity in stock:"+curr.data.numberInStock);
             recInOrder(curr.right); 

@@ -3,7 +3,7 @@ package gameshop;
 class Player
     {
         public String name;
-        public Weapon[] backpack;
+        public Backpack backpack;
         public int numItems;
         public double money;
 
@@ -12,26 +12,18 @@ class Player
             name = n;
             money = m;
             numItems = 0;
-            backpack = new Weapon[10];
+            backpack = new Backpack(200);
         }
 
-        public void buy(Weapon w)
+        public boolean buy(Weapon w)
         {
             System.out.println(w.weaponName+" bought...");
-            backpack[numItems] = w;
-            numItems++;
-            System.out.println(numItems);
+            return backpack.buy(w);
         }
         public void withdraw(double amt)
         {
             money = money - amt;
         }
-
-        public boolean inventoryFull()
-        {
-            return (numItems == 10) ;
-        }
-
 
         public void printCharacter()
         {
@@ -43,9 +35,7 @@ class Player
         {
              System.out.println(" "+name+", you own "+numItems+" Weapons:");
             for (int x = 0; x < numItems; x++)
-            {
-                 System.out.println(" "+backpack[x].weaponName);
-            }
+            backpack.printWeapons();
             System.out.println();
         }
     }
