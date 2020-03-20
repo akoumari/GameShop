@@ -9,25 +9,26 @@ public class BSTree {
         root=null;
     }
      
-    public boolean search(int key){
+    public BSTNode search(String key){
         if (root==null){
-            return false;
+            return null;
         }
         BSTNode curr=root;
-        while (curr!=null && curr.data!=key){
-            if (curr.data>key){
+        while (curr!=null && curr.data.item.weaponName.compareToIgnoreCase(key) != 0){
+            if (curr.data.item.weaponName.compareToIgnoreCase(key) > 0){
                 curr=curr.left;
             }else{
                 curr=curr.right;
             }
         }
         if (curr==null){
-            return false;
+            return null;
         }     
-        return true;
+        return curr;
     }
     
-    public void insert(int key){
+    public void insert(Weapon w, int quantity ){
+        ShopItem key = new ShopItem(w,quantity);
         BSTNode newNode = new BSTNode(key);
         if (root == null){
             root=newNode;
@@ -37,13 +38,13 @@ public class BSTree {
         current=parent=root;
         while (current!=null){
             parent=current;
-            if (current.data>key){
+            if (current.data.item.weaponName.compareToIgnoreCase(key.item.weaponName) > 0){
                 current=current.left;
             }else{
                 current=current.right;
             }
         }
-        if (parent.data>key){
+        if (parent.data.item.weaponName.compareToIgnoreCase(key.item.weaponName) > 0){
                 parent.left=newNode;
             }else{
                 parent.right=newNode;
@@ -59,7 +60,7 @@ public class BSTree {
     public void recInOrder(BSTNode curr){
         if (curr!=null){
             recInOrder(curr.left);
-            System.out.print(" "+curr.data);
+            System.out.println("Name: " +curr.data.item.weaponName+"   Damage:"+curr.data.item.damage+"    Cost:"+curr.data.item.cost+"     Quantity in stock:"+curr.data.numberInStock);
             recInOrder(curr.right); 
         }
     }

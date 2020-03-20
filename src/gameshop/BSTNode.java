@@ -2,11 +2,11 @@ package gameshop;
 
 
 public class BSTNode {
-    public int data;
+    public ShopItem data;
     public BSTNode left;
     public BSTNode right;
     
-    public BSTNode(int data){
+    public BSTNode(ShopItem data){
         this.data = data;
         left=right=null;
     }   

@@ -25,7 +25,7 @@ public class GameShop {
         }
         
     
-        public static void addWeapons(HashTable h,Scanner sc)
+        public static void addWeapons(BSTree stock,Scanner sc)
         {
             System.out.println("***********WELCOME TO THE WEAPON ADDING MENU*********");
             String weaponName; int weaponRange; int weaponDamage; double weaponWeight; double weaponCost;
@@ -40,45 +40,45 @@ public class GameShop {
                 weaponCost=getDouble(sc,"Please enter the Cost of the Weapon:");
                 Weapon w = new Weapon(weaponName, weaponRange, weaponDamage, weaponWeight, weaponCost);
                 quantity=getInteger(sc,"Please enter the quantity in stock:"); 
-                h.put(w,quantity);
+                stock.insert(w,quantity);
                 System.out.print("Please enter the NAME of another Weapon ('end' to quit):");
                 weaponName = sc.next();
             }
         }
 
-        public static void showRoomMenu(HashTable ht,Player p){
+        public static void showRoomMenu(BSTree bst,Player p){
             System.out.println("WELCOME TO THE SHOWROOM!!!!");
-            ht.printTable();
+            bst.inOrderTrav();
             System.out.println("You have "+p.money+" money.");
             System.out.println("Please select a weapon to buy('end' to quit):");
         }
         
-        public static void showRoom(HashTable ht, Player p,Scanner sc)
+        public static void showRoom(BSTree bst, Player p,Scanner sc)
         {
             String choice;
-            showRoomMenu(ht,p);
+            showRoomMenu(bst,p);
             choice=sc.next();
             while (choice.compareTo("end") != 0 && !p.inventoryFull())
             {
-                ShopItem si = ht.get(choice);
+                BSTNode si = bst.search(choice);
                 if (si != null)
                 {
-                    if (si.item.cost > p.money)
+                    if (si.data.item.cost > p.money)
                     {
-                        System.out.println("Insufficient funds to buy "+si.item.weaponName );
+                        System.out.println("Insufficient funds to buy "+si.data.item.weaponName );
                     }
                     else
                     {
-                        p.buy(si.item);
-                        p.withdraw(si.item.cost);
-                        si.numberInStock--;
+                        p.buy(si.data.item);
+                        p.withdraw(si.data.item.cost);
+                        si.data.numberInStock--;
                     }
                 }
                 else
                 {
                     System.out.println(" ** "+choice+" not found!! **" );
                 }
-                showRoomMenu(ht,p);
+                showRoomMenu(bst,p);
                 choice = sc.next();
             }
             System.out.println("");
@@ -91,9 +91,9 @@ public class GameShop {
             System.out.println("Please enter Player name:");
             pname=sc.next();
             Player pl= new Player(pname,45);
-            HashTable ht= new HashTable(101);
-            addWeapons(ht,sc);
-            showRoom(ht, pl,sc);
+            BSTree bst= new BSTree();
+            addWeapons(bst,sc);
+            showRoom(bst, pl,sc);
             pl.printCharacter();
 
         }
