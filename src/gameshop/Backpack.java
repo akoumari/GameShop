@@ -27,24 +27,22 @@ package gameshop;
                 return true;
             }
             BPNode curr = head;
+            while(curr.next != null && curr.data.weaponName.compareToIgnoreCase(weapon.weaponName) != 0){
+                curr = curr.next;
+            }
             if(curr.data.weaponName.compareToIgnoreCase(weapon.weaponName) == 0){
                     curr.quantity++;
                     return true;
-            }
-            while(curr.next != null){
-                if(curr.data.weaponName.compareToIgnoreCase(weapon.weaponName) == 0){
-                    curr.quantity++;
-                    return true;
-                }
-                curr = curr.next;
             }
             curr.next = n;
             return true;
         }
             public void printWeapons(){
                 BPNode curr = head;
+                System.out.println(" Weapon name\t\tQuantity");
                 while(curr != null){
-                    System.out.print(" Weapon name: "+curr.data.weaponName+" Quantity: "+curr.quantity);
+                    System.out.print(" "+curr.data.weaponName+"\t\t"+curr.quantity);
+                    System.out.println("");
                     curr = curr.next;
                 }
                 System.out.println("");
