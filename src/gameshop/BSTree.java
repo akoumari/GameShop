@@ -97,4 +97,26 @@ public class BSTree {
             recPreOrder(curr.right); 
         }
     }
+    public void delete(String key){
+        root = deleteWorker(root,key);    
+    }
+    
+    private BSTNode deleteWorker(BSTNode curr,String key){
+            if (curr == null) return curr;
+            if (curr.data.item.weaponName.compareToIgnoreCase(key) < 0) curr.left = deleteWorker(curr.left, key);
+            if (curr.data.item.weaponName.compareToIgnoreCase(key) > 0) curr.right = deleteWorker(curr.right, key);
+
+            if (curr.data.item.weaponName.compareToIgnoreCase(key) == 0)
+            {
+                if (curr.left == null) return curr.right;
+                if (curr.right == null) return curr.left;
+                // get in-order successor
+                BSTNode successor = curr.right;
+                while (successor.left != null)
+                    successor = successor.left;
+                curr.data = successor.data; //copy the data
+                curr.right = deleteWorker(curr.right, successor.data.item.weaponName);
+            }
+            return curr;
+    }
 }

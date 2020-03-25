@@ -52,6 +52,16 @@ public class GameShop {
             System.out.println("You have "+p.money+" money.");
             System.out.println("Please select a weapon to buy('end' to quit):");
         }
+        public static void delete(BSTree bst,Scanner sc){
+            System.out.println("Please enter the NAME of the Weapon to delete ('end' to quit):");
+            String weapon = sc.next();
+            while (weapon.compareTo("end") != 0)
+            {
+                bst.delete(weapon); 
+                System.out.println("Please enter the NAME of the Weapon to delete ('end' to quit):");
+                weapon = sc.next();
+            }
+        }
         
         public static void showRoom(BSTree bst, Player p,Scanner sc)
         {
@@ -95,25 +105,29 @@ public class GameShop {
                 System.out.println("Greetings traveller! Welcome to the Weapon Shop\n\n" +
                 "Please select an option from the list below.\n" +
                 "1.Add Weapons to the shop\n" +
-                "2.Buy Weapons\n" +
-                "3.View Backpack\n" +
-                "4.View Charecter\n" +        
-                "5.Exit");
+                "2.Delete a Weapons from the shop\n" +
+                "3.Buy Weapons\n" +
+                "4.View Backpack\n" +
+                "5.View Charecter\n" +        
+                "6.Exit");
                 option = sc.nextInt();
                 switch(option){
                     case 1: 
                         addWeapons(bst,sc);
                         break;
                     case 2: 
-                        showRoom(bst, pl,sc);
+                        delete(bst, sc);
                         break;
                     case 3: 
-                        pl.printBackpack();
+                        showRoom(bst, pl,sc);
                         break;
                     case 4: 
-                        pl.printCharacter();
+                        pl.printBackpack();
                         break;
                     case 5: 
+                        pl.printCharacter();
+                        break;
+                    case 6: 
                         System.out.println("\nThank you for being a memeber of the CASUAL WRITERS BOOK CLUB");
                         break;    
                 }
