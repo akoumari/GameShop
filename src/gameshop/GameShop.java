@@ -132,7 +132,7 @@ public class GameShop {
                         break;    
                 }
 
-            }while(option != 5);
+            }while(option != 6);
             System.out.println("Well met traveller! Be safe. Endor can be a dangerous place...");
 
 
